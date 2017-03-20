@@ -60,20 +60,18 @@ def bc(m):
 
 @bot.message_handler(commands=['start'])
 def start(m):
-    banlist = rediss.sismember('banlist', '{}'.format(m.from_user.id))
-    if str(banlist) == 'False':
-       rankch = bot.get_chat_member(channel,m.from_user.id).status
-       if rankch == 'creator' or rankch == 'administrator' or rankch == 'member':
-          markup = types.InlineKeyboardMarkup()
-          c = types.InlineKeyboardButton("🇮🇷 فارسی 🇮🇷",callback_data='startfa')
-          markup.add(c)
-          b = types.InlineKeyboardButton("🇬🇧 English 🇬🇧",callback_data='starten')
-          markup.add(b)
-          id = m.from_user.id
-          rediss.sadd('members',id)
-          bot.send_message(m.chat.id, "`سلام`\n`به روبات مترجم خوش آمدید`\n`لطفا زبان خود را انتخاب کنید`\n\n*Hi*\n_Welcome To TranslateBot_\n*Please Select Your Language*", disable_notification=True, reply_markup=markup, parse_mode='Markdown')
-       else:
-          bot.send_message(m.chat.id, "*First Join To Bot Channel Then Try Again!*\n`ابتدا در کانال ربات عضو شوید و مجددا تلاش کنید!`\n{}".format(channel), disable_notification=True, parse_mode='Markdown')
+   rankch = bot.get_chat_member(channel,m.from_user.id).status
+   if rankch == 'creator' or rankch == 'administrator' or rankch == 'member':
+         markup = types.InlineKeyboardMarkup()
+         c = types.InlineKeyboardButton("🇮🇷 فارسی 🇮🇷",callback_data='startfa')
+         markup.add(c)
+         b = types.InlineKeyboardButton("🇬🇧 English 🇬🇧",callback_data='starten')
+         markup.add(b)
+         id = m.from_user.id
+         rediss.sadd('members',id)
+         bot.send_message(m.chat.id, "`سلام`\n`به روبات مترجم خوش آمدید`\n`لطفا زبان خود را انتخاب کنید`\n\n*Hi*\n_Welcome To TranslateBot_\n*Please Select Your Language*", disable_notification=True, reply_markup=markup, parse_mode='Markdown')
+   else:
+         bot.send_message(m.chat.id, "*First Join To Bot Channel Then Try Again!*\n`ابتدا در کانال ربات عضو شوید و مجددا تلاش کنید!`\n{}".format(channel), disable_notification=True, parse_mode='Markdown')
 
 #################################################################################################################################################################################################
 
